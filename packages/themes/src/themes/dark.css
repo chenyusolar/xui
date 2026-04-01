@@ -1,0 +1,36 @@
+[data-theme="dark"],
+.dark {
+  --xui-color-primary: #1668dc;
+  --xui-color-primary-hover: #4082e6;
+  --xui-color-primary-active: #0d47a1;
+  --xui-color-primary-bg: #1a2a3a;
+
+  --xui-color-success: #3d8c40;
+  --xui-color-success-hover: #52b74a;
+  --xui-color-success-bg: #1a2a1a;
+
+  --xui-color-warning: #d99608;
+  --xui-color-warning-hover: #f0ad0c;
+  --xui-color-warning-bg: #2a2416;
+
+  --xui-color-danger: #dc4446;
+  --xui-color-danger-hover: #e66062;
+  --xui-color-danger-bg: #2a1a1a;
+
+  --xui-color-text: #e8e8e8;
+  --xui-color-text-secondary: #b0b0b0;
+  --xui-color-text-tertiary: #707070;
+  --xui-color-text-placeholder: #505050;
+
+  --xui-color-bg: #141414;
+  --xui-color-bg-secondary: #1a1a1a;
+  --xui-color-bg-tertiary: #242424;
+
+  --xui-color-border: #303030;
+  --xui-color-border-hover: #404040;
+
+  --xui-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --xui-shadow-md: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --xui-shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.5);
+  --xui-shadow-xl: 0 8px 32px rgba(0, 0, 0, 0.6);
+}
