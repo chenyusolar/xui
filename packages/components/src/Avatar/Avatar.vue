@@ -61,6 +61,7 @@ const handleError = () => {
   background: #1677ff;
   color: #fff;
   font-weight: 500;
+  border-radius: 50%;
 }
 
 .x-avatar--small { width: 32px; height: 32px; font-size: 14px; }

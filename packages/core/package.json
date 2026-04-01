@@ -4,17 +4,17 @@
   "description": "XUI core - platform abstraction & reactive system",
   "type": "module",
   "main": "./dist/index.cjs",
-  "module": "./dist/index.mjs",
+  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
+      "import": "./dist/index.js",
       "require": "./dist/index.cjs"
     },
     "./platform": {
       "types": "./dist/platform.d.ts",
-      "import": "./dist/platform.mjs",
+      "import": "./dist/platform.js",
       "require": "./dist/platform.cjs"
     }
   },

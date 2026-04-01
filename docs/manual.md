@@ -1626,6 +1626,231 @@ const longList = Array.from({ length: 1000 }, (_, i) => ({
 
 ---
 
+### XSwiper 轮播图
+
+**基础用法**
+
+```vue
+<XSwiper height="180px">
+  <XSwiperItem>
+    <XImage src="/banner1.jpg" width="100%" height="100%" mode="aspectFill" />
+  </XSwiperItem>
+  <XSwiperItem>
+    <XImage src="/banner2.jpg" width="100%" height="100%" mode="aspectFill" />
+  </XSwiperItem>
+  <XSwiperItem>
+    <XImage src="/banner3.jpg" width="100%" height="100%" mode="aspectFill" />
+  </XSwiperItem>
+</XSwiper>
+```
+
+**关闭自动播放**
+
+```vue
+<XSwiper height="160px" :autoplay="false" :show-arrow="true">
+  <XSwiperItem>
+    <XImage src="/slide1.jpg" width="100%" height="100%" mode="aspectFill" />
+  </XSwiperItem>
+  <XSwiperItem>
+    <XImage src="/slide2.jpg" width="100%" height="100%" mode="aspectFill" />
+  </XSwiperItem>
+</XSwiper>
+```
+
+**属性**
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| modelValue | `number` | `0` | 当前激活索引 |
+| autoplay | `boolean` | `true` | 是否自动播放 |
+| interval | `number` | `3000` | 自动播放间隔(ms) |
+| duration | `number` | `300` | 切换动画时长(ms) |
+| height | `string` | `'200px'` | 轮播高度 |
+| showDots | `boolean` | `true` | 是否显示指示点 |
+| showArrow | `boolean` | `false` | 是否显示箭头 |
+| loop | `boolean` | `true` | 是否循环播放 |
+
+**事件**
+
+| 事件 | 参数 | 说明 |
+|------|------|------|
+| change | `(index: number)` | 切换时触发 |
+
+**功能**
+- 触摸滑动切换
+- 自动播放
+- 指示点导航
+- 左右箭头导航
+- 支持循环播放
+
+---
+
+### XBanner 通知条
+
+**基础用法**
+
+```vue
+<XBanner title="Information" description="This is an informational banner" icon="ℹ" variant="info" />
+<XBanner title="Success" description="Operation completed successfully" icon="✓" variant="success" />
+<XBanner title="Warning" description="Please check your input" icon="⚠" variant="warning" />
+<XBanner title="Error" description="Something went wrong" icon="✕" variant="error" />
+```
+
+**可关闭**
+
+```vue
+<XBanner title="Warning" description="Warning message" icon="⚠" variant="warning" show-close @close="handleClose" />
+```
+
+**带操作按钮**
+
+```vue
+<XBanner description="Banner with action" icon="📢" variant="info" action-text="View" @action="handleClick" />
+```
+
+**自定义操作**
+
+```vue
+<XBanner title="Custom" description="With custom action slot" variant="success">
+  <template #action>
+    <XButton size="small" type="success">立即查看</XButton>
+  </template>
+</XBanner>
+```
+
+**属性**
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| title | `string` | - | 标题 |
+| description | `string` | - | 描述文本 |
+| icon | `string` | - | 图标 |
+| variant | `'info' \| 'success' \| 'warning' \| 'error'` | `'info'` | 通知类型 |
+| showClose | `boolean` | `false` | 是否显示关闭按钮 |
+| actionText | `string` | - | 操作按钮文字 |
+
+**事件**
+
+| 事件 | 参数 | 说明 |
+|------|------|------|
+| close | `()` | 点击关闭时触发 |
+| action | `()` | 点击操作按钮时触发 |
+
+**插槽**
+
+| 插槽 | 说明 |
+|------|------|
+| action | 自定义操作区域 |
+
+---
+
+### XTabBar 底部菜单
+
+**基础用法（默认4个Tab）**
+
+```vue
+<XTabBar v-model="activeTab" />
+
+<script setup>
+const activeTab = ref('home')
+</script>
+```
+
+**自定义 Tab 列表**
+
+```vue
+<XTabBar
+  v-model="activeTab"
+  :tabs="customTabs"
+/>
+
+<script setup>
+const activeTab = ref('home')
+const customTabs = [
+  { key: 'home', label: '首页', icon: '🏠' },
+  { key: 'message', label: '消息', icon: '💬' },
+  { key: 'discover', label: '发现', icon: '🔍' },
+  { key: 'mine', label: '我的', icon: '👤' },
+]
+</script>
+```
+
+**带徽标**
+
+```vue
+<XTabBar
+  v-model="activeTab"
+  :tabs="tabsWithBadge"
+/>
+
+<script setup>
+const activeTab = ref('home')
+const tabsWithBadge = [
+  { key: 'home', label: '首页', icon: '🏠' },
+  { key: 'message', label: '消息', icon: '💬', badge: 5 },
+  { key: 'discover', label: '发现', icon: '🔍', dot: true },
+  { key: 'mine', label: '我的', icon: '👤' },
+]
+</script>
+```
+
+**自定义颜色**
+
+```vue
+<XTabBar
+  v-model="activeTab"
+  active-color="#52c41a"
+  inactive-color="#999"
+  bg-color="#fff"
+/>
+```
+
+**非固定模式**
+
+```vue
+<XTabBar v-model="activeTab" :fixed="false" />
+```
+
+**属性**
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| modelValue | `string` | - | 当前选中的 tab key |
+| tabs | `TabBarItem[]` | 默认4个 | Tab 列表配置 |
+| fixed | `boolean` | `true` | 是否固定在底部 |
+| bgColor | `string` | `'#fff'` | 背景色 |
+| activeColor | `string` | `'#1677ff'` | 选中时颜色 |
+| inactiveColor | `string` | `'#999'` | 未选中颜色 |
+
+**TabBarItem 类型**
+
+```ts
+interface TabBarItem {
+  key: string         // 唯一标识
+  label: string       // 显示文字
+  icon: string        // 图标
+  activeIcon?: string // 选中时图标
+  badge?: number      // 数字徽标
+  dot?: boolean       // 红点徽标
+}
+```
+
+**事件**
+
+| 事件 | 参数 | 说明 |
+|------|------|------|
+| update:modelValue | `(value: string)` | 切换时触发 |
+| change | `(value: string, index: number)` | 切换时触发 |
+
+**功能**
+- 固定底部显示
+- 自定义图标和文字
+- 数字徽标（>99 显示 99+）
+- 红点徽标
+- 可配置颜色
+
+---
+
 ### ErrorBoundary 错误边界
 
 **基础用法**

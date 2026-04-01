@@ -9,6 +9,7 @@ export default defineConfig({
         platform: 'src/platform.ts',
       },
       formats: ['es', 'cjs'],
+      fileName: (format, name) => `${name}.${format === 'es' ? 'js' : 'cjs'}`,
     },
     rollupOptions: {
       external: ['vue'],

@@ -23,44 +23,73 @@ export { XRow } from './Row'
 export { XCol } from './Col'
 export { XVirtualList, type VirtualItem } from './VirtualList'
 export { XImage } from './Image'
+export { XSwiper, XSwiperItem } from './Swiper'
+export { XBanner } from './Banner'
+export { XTabBar, type TabBarItem } from './TabBar'
 export { default as XErrorBoundary } from './ErrorBoundary/ErrorBoundary.vue'
 
 import type { App, Plugin } from 'vue'
+import { XButton } from './Button'
+import { XCard } from './Card'
+import { XList } from './List'
+import { XInput } from './Input'
+import { XModal } from './Modal'
+import { XTabs } from './Tabs'
+import { XBadge } from './Badge'
+import { XAvatar } from './Avatar'
+import { XGrid } from './Grid'
+import { XSwitch } from './Switch'
+import { XTag } from './Tag'
+import { XLoading } from './Loading'
+import { XDivider } from './Divider'
+import { XNavBar } from './NavBar'
+import { XProgress } from './Progress'
+import { XPopup } from './Popup'
+import { XTable } from './Table'
+import { XForm } from './Form'
+import { XSelect } from './Select'
+import { XPicker } from './Picker'
+import { XDatePicker } from './DatePicker'
+import { XRow } from './Row'
+import { XCol } from './Col'
+import { XVirtualList } from './VirtualList'
+import { XImage } from './Image'
+import { XSwiper, XSwiperItem } from './Swiper'
+import { XBanner } from './Banner'
+import { XTabBar } from './TabBar'
+import XErrorBoundary from './ErrorBoundary/ErrorBoundary.vue'
 
-const components: { name: string; comp: () => Promise<any> }[] = [
-  { name: 'XButton', comp: () => import('./Button/Button.vue') },
-  { name: 'XCard', comp: () => import('./Card/Card.vue') },
-  { name: 'XList', comp: () => import('./List/List.vue') },
-  { name: 'XInput', comp: () => import('./Input/Input.vue') },
-  { name: 'XModal', comp: () => import('./Modal/Modal.vue') },
-  { name: 'XTabs', comp: () => import('./Tabs/Tabs.vue') },
-  { name: 'XBadge', comp: () => import('./Badge/Badge.vue') },
-  { name: 'XAvatar', comp: () => import('./Avatar/Avatar.vue') },
-  { name: 'XGrid', comp: () => import('./Grid/Grid.vue') },
-  { name: 'XSwitch', comp: () => import('./Switch/Switch.vue') },
-  { name: 'XTag', comp: () => import('./Tag/Tag.vue') },
-  { name: 'XLoading', comp: () => import('./Loading/Loading.vue') },
-  { name: 'XDivider', comp: () => import('./Divider/Divider.vue') },
-  { name: 'XNavBar', comp: () => import('./NavBar/NavBar.vue') },
-  { name: 'XProgress', comp: () => import('./Progress/Progress.vue') },
-  { name: 'XPopup', comp: () => import('./Popup/Popup.vue') },
-  { name: 'XTable', comp: () => import('./Table/Table.vue') },
-  { name: 'XForm', comp: () => import('./Form/Form.vue') },
-  { name: 'XSelect', comp: () => import('./Select/Select.vue') },
-  { name: 'XPicker', comp: () => import('./Picker/Picker.vue') },
-  { name: 'XDatePicker', comp: () => import('./DatePicker/DatePicker.vue') },
-  { name: 'XRow', comp: () => import('./Row/Row.vue') },
-  { name: 'XCol', comp: () => import('./Col/Col.vue') },
-  { name: 'XVirtualList', comp: () => import('./VirtualList/VirtualList.vue') },
-  { name: 'XImage', comp: () => import('./Image/Image.vue') },
-  { name: 'XErrorBoundary', comp: () => import('./ErrorBoundary/ErrorBoundary.vue') },
-]
-
-export async function install(app: App) {
-  for (const { name, comp } of components) {
-    const module = await comp()
-    app.component(name, module.default)
-  }
+export function install(app: App) {
+  app.component('XButton', XButton)
+  app.component('XCard', XCard)
+  app.component('XList', XList)
+  app.component('XInput', XInput)
+  app.component('XModal', XModal)
+  app.component('XTabs', XTabs)
+  app.component('XBadge', XBadge)
+  app.component('XAvatar', XAvatar)
+  app.component('XGrid', XGrid)
+  app.component('XSwitch', XSwitch)
+  app.component('XTag', XTag)
+  app.component('XLoading', XLoading)
+  app.component('XDivider', XDivider)
+  app.component('XNavBar', XNavBar)
+  app.component('XProgress', XProgress)
+  app.component('XPopup', XPopup)
+  app.component('XTable', XTable)
+  app.component('XForm', XForm)
+  app.component('XSelect', XSelect)
+  app.component('XPicker', XPicker)
+  app.component('XDatePicker', XDatePicker)
+  app.component('XRow', XRow)
+  app.component('XCol', XCol)
+  app.component('XVirtualList', XVirtualList)
+  app.component('XImage', XImage)
+  app.component('XSwiper', XSwiper)
+  app.component('XSwiperItem', XSwiperItem)
+  app.component('XBanner', XBanner)
+  app.component('XTabBar', XTabBar)
+  app.component('XErrorBoundary', XErrorBoundary)
 }
 
-export const XuiComponents: Plugin = { install: install as any }
+export const XuiComponents: Plugin = { install }

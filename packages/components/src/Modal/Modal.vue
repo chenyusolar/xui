@@ -1,22 +1,26 @@
 <template>
-  <view class="x-modal-overlay" v-if="visible" :class="{ 'x-modal-overlay--visible': visible }" @click.self="maskClosable && handleClose()">
-    <view class="x-modal" :class="[`x-modal--${size}`]" :style="modalStyle">
-      <view class="x-modal__header">
-        <text class="x-modal__title">{{ title }}</text>
-        <view v-if="closable" class="x-modal__close" @click="handleClose">×</view>
-      </view>
-      <view class="x-modal__body">
-        <slot />
-      </view>
-      <view v-if="$slots.footer" class="x-modal__footer">
-        <slot name="footer" />
-      </view>
-      <view v-else-if="showFooter" class="x-modal__footer">
-        <view class="x-modal__btn" @click="handleCancel">取消</view>
-        <view class="x-modal__btn x-modal__btn--primary" @click="handleConfirm">确定</view>
-      </view>
+  <Transition name="x-modal-fade">
+    <view v-if="visible" class="x-modal-overlay" @click.self="maskClosable && handleClose()">
+      <Transition name="x-modal-zoom" appear>
+        <view class="x-modal" :class="[`x-modal--${size}`]" :style="modalStyle">
+          <view class="x-modal__header">
+            <text class="x-modal__title">{{ title }}</text>
+            <view v-if="closable" class="x-modal__close" @click="handleClose">×</view>
+          </view>
+          <view class="x-modal__body">
+            <slot />
+          </view>
+          <view v-if="$slots.footer" class="x-modal__footer">
+            <slot name="footer" />
+          </view>
+          <view v-else-if="showFooter" class="x-modal__footer">
+            <view class="x-modal__btn" @click="handleCancel">取消</view>
+            <view class="x-modal__btn x-modal__btn--primary" @click="handleConfirm">确定</view>
+          </view>
+        </view>
+      </Transition>
     </view>
-  </view>
+  </Transition>
 </template>
 
 <script setup lang="ts">
@@ -88,39 +92,17 @@ const handleCancel = () => {
   align-items: center;
   justify-content: center;
   z-index: 1000;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s, visibility 0.3s;
-}
-
-.x-modal-overlay--visible {
-  opacity: 1;
-  visibility: visible;
 }
 
 .x-modal {
   background: #fff;
   border-radius: 12px;
   overflow: hidden;
-  transform: scale(0.9);
-  transition: transform 0.3s;
 }
 
-.x-modal-overlay--visible .x-modal {
-  transform: scale(1);
-}
-
-.x-modal--small {
-  width: 320px;
-}
-
-.x-modal--medium {
-  width: 480px;
-}
-
-.x-modal--large {
-  width: 640px;
-}
+.x-modal--small { width: 320px; }
+.x-modal--medium { width: 480px; }
+.x-modal--large { width: 640px; }
 
 .x-modal__header {
   display: flex;
@@ -141,11 +123,10 @@ const handleCancel = () => {
   color: #8c8c8c;
   cursor: pointer;
   padding: 0 4px;
+  transition: color 0.2s;
 }
 
-.x-modal__close:hover {
-  color: #333;
-}
+.x-modal__close:hover { color: #333; }
 
 .x-modal__body {
   padding: 20px;
@@ -173,10 +154,7 @@ const handleCancel = () => {
   transition: all 0.2s;
 }
 
-.x-modal__btn:hover {
-  border-color: #1677ff;
-  color: #1677ff;
-}
+.x-modal__btn:hover { border-color: #1677ff; color: #1677ff; }
 
 .x-modal__btn--primary {
   background: #1677ff;
@@ -184,7 +162,28 @@ const handleCancel = () => {
   border-color: #1677ff;
 }
 
-.x-modal__btn--primary:hover {
-  background: #4096ff;
+.x-modal__btn--primary:hover { background: #4096ff; }
+
+/* 遮罩层动画 */
+.x-modal-fade-enter-active,
+.x-modal-fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.x-modal-fade-enter-from,
+.x-modal-fade-leave-to {
+  opacity: 0;
+}
+
+/* 对话框缩放动画 */
+.x-modal-zoom-enter-active,
+.x-modal-zoom-leave-active {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+}
+
+.x-modal-zoom-enter-from,
+.x-modal-zoom-leave-to {
+  transform: scale(0.8);
+  opacity: 0;
 }
 </style>

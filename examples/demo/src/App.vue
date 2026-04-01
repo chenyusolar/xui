@@ -1,5 +1,7 @@
 <template>
   <view class="demo-app">
+    <XNavBar title="XUI Demo" :fixed="false" />
+
     <view class="demo-header">
       <text class="demo-title">XUI Demo</text>
       <text class="demo-subtitle">Cross-platform UI Framework</text>
@@ -60,6 +62,18 @@
         <XAvatar name="Bob Wilson" size="large" />
         <XAvatar icon="👤" bgColor="#52c41a" />
       </view>
+      <view class="demo-row">
+        <XAvatar name="A" shape="circle" bgColor="#1677ff" />
+        <XAvatar name="B" shape="circle" bgColor="#52c41a" />
+        <XAvatar name="C" shape="circle" bgColor="#722ed1" />
+        <XAvatar name="D" shape="circle" bgColor="#fa8c16" />
+        <XAvatar name="E" shape="square" bgColor="#f5222d" />
+      </view>
+      <view class="demo-row" style="margin-top: 8px;">
+        <XAvatar name="张" shape="circle" size="large" bgColor="#1890ff" />
+        <XAvatar name="李" shape="circle" size="large" bgColor="#13c2c2" />
+        <XAvatar name="王" shape="circle" size="large" bgColor="#722ed1" />
+      </view>
     </XCard>
 
     <XCard title="Switch" class="demo-section">
@@ -109,10 +123,54 @@
       </XGrid>
     </XCard>
 
+    <XCard title="Images" class="demo-section">
+      <text class="demo-section-title">Normal</text>
+      <view class="demo-row">
+        <XImage src="https://picsum.photos/200/150" width="120px" height="90px" shape="rounded" />
+        <XImage src="https://picsum.photos/201/150" width="120px" height="90px" shape="rounded" />
+        <XImage src="https://picsum.photos/202/150" width="120px" height="90px" shape="rounded" />
+      </view>
+      <text class="demo-section-title">Circle</text>
+      <view class="demo-row">
+        <XImage src="https://picsum.photos/100/100" width="80px" height="80px" shape="circle" />
+        <XImage src="https://picsum.photos/101/100" width="80px" height="80px" shape="circle" />
+        <XImage src="https://picsum.photos/102/100" width="80px" height="80px" shape="circle" />
+      </view>
+      <text class="demo-section-title">Rounded</text>
+      <view class="demo-row">
+        <XImage src="https://picsum.photos/300/200" width="200px" height="133px" shape="rounded" />
+      </view>
+      <text class="demo-section-title">Fit Modes</text>
+      <view class="demo-row">
+        <view class="demo-image-mode">
+          <XImage src="https://picsum.photos/200/300" width="120px" height="90px" shape="rounded" mode="aspectFit" />
+          <text>aspectFit</text>
+        </view>
+        <view class="demo-image-mode">
+          <XImage src="https://picsum.photos/200/300" width="120px" height="90px" shape="rounded" mode="aspectFill" />
+          <text>aspectFill</text>
+        </view>
+      </view>
+    </XCard>
+
     <XCard title="Modal" class="demo-section">
-      <XButton type="primary" @click="showModal = true">Open Modal</XButton>
+      <view class="demo-row">
+        <XButton type="primary" @click="showModal = true">Open Modal</XButton>
+        <XButton type="success" @click="showModalSmall = true">Small Modal</XButton>
+        <XButton type="warning" @click="showModalLarge = true">Large Modal</XButton>
+      </view>
       <XModal v-model:visible="showModal" title="XUI Modal">
-        <text>This is a modal dialog component.</text>
+        <text>This is a modal dialog component with zoom animation.</text>
+      </XModal>
+      <XModal v-model:visible="showModalSmall" title="Small Modal" size="small">
+        <text>This is a small modal dialog.</text>
+      </XModal>
+      <XModal v-model:visible="showModalLarge" title="Large Modal" size="large">
+        <text>This is a large modal dialog with more space for content.</text>
+        <view class="demo-modal-content">
+          <XInput label="Name" placeholder="Enter your name..." />
+          <XInput label="Email" placeholder="Enter your email..." />
+        </view>
       </XModal>
     </XCard>
 
@@ -122,9 +180,76 @@
       <text>Content below</text>
     </XCard>
 
+    <XCard title="Swiper / Banner" class="demo-section">
+      <text class="demo-section-title">Swiper (Auto Play)</text>
+      <XSwiper height="180px" :autoplay="true" :interval="3000">
+        <XSwiperItem>
+          <XImage src="https://picsum.photos/800/400?random=1" width="100%" height="100%" mode="aspectFill" shape="rounded" />
+        </XSwiperItem>
+        <XSwiperItem>
+          <XImage src="https://picsum.photos/800/400?random=2" width="100%" height="100%" mode="aspectFill" shape="rounded" />
+        </XSwiperItem>
+        <XSwiperItem>
+          <XImage src="https://picsum.photos/800/400?random=3" width="100%" height="100%" mode="aspectFill" shape="rounded" />
+        </XSwiperItem>
+      </XSwiper>
+
+      <text class="demo-section-title">With Arrows</text>
+      <XSwiper height="160px" :autoplay="false" :show-arrow="true">
+        <XSwiperItem>
+          <XImage src="https://picsum.photos/800/400?random=4" width="100%" height="100%" mode="aspectFill" shape="rounded" />
+        </XSwiperItem>
+        <XSwiperItem>
+          <XImage src="https://picsum.photos/800/400?random=5" width="100%" height="100%" mode="aspectFill" shape="rounded" />
+        </XSwiperItem>
+      </XSwiper>
+
+      <text class="demo-section-title">Banner Variants</text>
+      <view style="display: flex; flex-direction: column; gap: 8px; margin-top: 8px;">
+        <XBanner title="Information" description="This is an informational banner" icon="ℹ" variant="info" />
+        <XBanner title="Success" description="Operation completed successfully" icon="✓" variant="success" />
+        <XBanner title="Warning" description="Please check your input" icon="⚠" variant="warning" />
+        <XBanner title="Error" description="Something went wrong" icon="✕" variant="error" show-close />
+        <XBanner description="Banner with action button" icon="📢" variant="info" action-text="View" @action="console.log('action clicked')" />
+      </view>
+    </XCard>
+
+    <XCard title="NavBar" class="demo-section">
+      <text class="demo-section-title">Basic</text>
+      <view class="demo-navbar-wrapper">
+        <XNavBar title="Basic NavBar" :fixed="false" />
+      </view>
+      <text class="demo-section-title">With Back Button</text>
+      <view class="demo-navbar-wrapper">
+        <XNavBar title="With Back" :fixed="false" show-back @back="console.log('back')" />
+      </view>
+      <text class="demo-section-title">Custom Color</text>
+      <view class="demo-navbar-wrapper">
+        <XNavBar title="Blue Theme" :fixed="false" bg-color="#1677ff" text-color="#fff" />
+      </view>
+      <text class="demo-section-title">Dark Theme</text>
+      <view class="demo-navbar-wrapper">
+        <XNavBar title="Dark NavBar" :fixed="false" bg-color="#1f1f1f" text-color="#fff" show-back />
+      </view>
+    </XCard>
+
+    <XCard title="TabBar" class="demo-section">
+      <text class="demo-section-title">Default Tabs</text>
+      <XTabBar v-model="activeBottomTab" :fixed="false" />
+      <text class="demo-section-title">Custom Tabs</text>
+      <XTabBar
+        v-model="activeBottomTab2"
+        :fixed="false"
+        :tabs="customTabs"
+        active-color="#52c41a"
+      />
+    </XCard>
+
     <view class="demo-footer">
       <text class="demo-footer-text">Built with XUI Framework</text>
     </view>
+
+    <XTabBar v-model="activeBottomTab" :tabs="bottomTabs" @change="handleTabChange" />
   </view>
 </template>
 
@@ -139,6 +264,28 @@ const switch2 = ref(false)
 const switch3 = ref(false)
 const activeTab = ref(0)
 const showModal = ref(false)
+const showModalSmall = ref(false)
+const showModalLarge = ref(false)
+const activeBottomTab = ref('home')
+const activeBottomTab2 = ref('home')
+
+const bottomTabs = [
+  { key: 'home', label: '首页', icon: '🏠' },
+  { key: 'tab1', label: '标签1', icon: '📄' },
+  { key: 'tab2', label: '标签2', icon: '📂' },
+  { key: 'setting', label: '设置', icon: '⚙️' },
+]
+
+const customTabs = [
+  { key: 'home', label: '主页', icon: '🏡', dot: false },
+  { key: 'tab1', label: '消息', icon: '💬', badge: 5 },
+  { key: 'tab2', label: '发现', icon: '🔍', dot: true },
+  { key: 'setting', label: '我的', icon: '👤' },
+]
+
+const handleTabChange = (key: string, index: number) => {
+  console.log('Tab changed:', key, index)
+}
 
 const tabItems = [
   { key: 0, label: 'Tab 1' },
@@ -274,5 +421,38 @@ body {
 .demo-footer-text {
   font-size: 12px;
   color: #bfbfbf;
+}
+
+.demo-modal-content {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.demo-section-title {
+  font-size: 12px;
+  color: #8c8c8c;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.demo-image-mode {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.demo-image-mode text {
+  font-size: 11px;
+  color: #999;
+}
+
+.demo-navbar-wrapper {
+  border: 1px solid #f0f0f0;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 12px;
 }
 </style>

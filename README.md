@@ -32,7 +32,7 @@ xui-project/
 │   ├── runtime-web/         # Web 渲染器
 │   ├── runtime-mini/        # 小程序编译器
 │   ├── runtime-fmx/         # FMX WebView 适配层
-│   ├── components/          # UI 组件库（26 个组件）
+│   ├── components/          # UI 组件库（29 个组件）
 │   ├── animations/          # 动画系统
 │   ├── themes/              # 主题系统
 │   └── cli/                 # 脚手架工具
@@ -198,7 +198,7 @@ export default defineConfig({
 
 ---
 
-## 组件库（26 个组件）
+## 组件库（29 个组件）
 
 ### 基础组件
 
@@ -231,7 +231,7 @@ export default defineConfig({
 
 | 组件 | 说明 |
 |------|------|
-| `XModal` | 对话框 - title/size/maskClosable/custom footer |
+| `XModal` | 对话框 - title/size/maskClosable/custom footer + 缩放动画 |
 | `XPopup` | 弹出层 - position(5种)/size/closable |
 | `XTabs` | 标签页 - line/card 类型 |
 | `XErrorBoundary` | 错误边界 - error 捕获 + fallback + retry |
@@ -244,6 +244,14 @@ export default defineConfig({
 | `XSelect` | 下拉选择 - options/disabled/clearable |
 | `XPicker` | 滚动选择器 - 多列选择 |
 | `XDatePicker` | 日期选择 - date/datetime/year-month/time |
+
+### 导航组件
+
+| 组件 | 说明 |
+|------|------|
+| `XSwiper` | 轮播图 - autoplay/arrow/dots/loop/touch |
+| `XTabBar` | 底部菜单 - fixed/badge/dot/custom tabs |
+| `XBanner` | 通知条 - info/success/warning/error + action |
 
 ### 使用示例
 
@@ -265,6 +273,42 @@ const genders = [
   { label: '女', value: 'female' },
 ]
 </script>
+```
+
+### 轮播图示例
+
+```vue
+<XSwiper height="180px" :autoplay="true" :interval="3000">
+  <XSwiperItem>
+    <XImage src="/banner1.jpg" width="100%" height="100%" mode="aspectFill" />
+  </XSwiperItem>
+  <XSwiperItem>
+    <XImage src="/banner2.jpg" width="100%" height="100%" mode="aspectFill" />
+  </XSwiperItem>
+</XSwiper>
+```
+
+### 底部菜单示例
+
+```vue
+<XTabBar v-model="activeTab" :tabs="tabs" />
+
+<script setup>
+const activeTab = ref('home')
+const tabs = [
+  { key: 'home', label: '首页', icon: '🏠' },
+  { key: 'message', label: '消息', icon: '💬', badge: 5 },
+  { key: 'discover', label: '发现', icon: '🔍', dot: true },
+  { key: 'mine', label: '我的', icon: '👤' },
+]
+</script>
+```
+
+### 通知条示例
+
+```vue
+<XBanner title="成功" description="操作已完成" icon="✓" variant="success" />
+<XBanner title="警告" description="请检查输入" icon="⚠" variant="warning" show-close />
 ```
 
 ---
